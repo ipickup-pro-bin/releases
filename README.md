@@ -40,11 +40,12 @@
 
 ```sh
 $> ./ipickup_pro-linux-x64 --help
-  -y, --no-confirmation  No confirmation
-      --config           Config UI
-  -p, --port PORT        Port number
-      --unbind           Unbind license key
-  -h, --help             Help
+  -y, --no-confirmation                     No confirmation
+      --config                              Config UI
+      --config-file <FILENAME>  config.yml  Config file
+  -p, --port <PORT>                         Port number
+      --unbind                              Unbind license key
+  -h, --help                                Help
 ```
 
 
@@ -69,7 +70,29 @@ model-id: # 自定意的型號ID
 
 ### 下載新版本後，如何將設定保留?
 
-將新的執行檔(e.g. .exe)複制至舊資料夾中，或將舊的 `config_override.yml` 複制至新資料夾中即可。
+將新的執行檔(e.g. .exe)複制至舊資料夾中，或將舊的設定檔(e.g. `config.yml`) 複制至新資料夾中即可。
+
+
+### 如何在同一主機上同時運作行多個 bot 應用程式？
+
+-   可於執行檔後面加上 `--config-file <FILENAME>` 以指定使用非預設的設定檔來執行任務或修改設定。
+-   修改設定時該注意 dashboard port 必須不同以確保程式能正常運作，或可於執行檔後面加上 `--port <PORT>` 。
+-   操作範例:
+    
+    ```sh
+    # 打開terminal，執行任務使用config-1.yml 的設定
+    $ ./ipickup_pro-linux-x64 --config-file config-1.yml --port 3000
+    # 打開另一terminal，執行任務使用config-2.yml 的設定
+    $ ./ipickup_pro-linux-x64 --config-file config-2.yml --port 3001
+    
+    # 使用web UI修改 config-3.yml 的設定
+    $ ./ipickup_pro-linux-x64 --config --config-file config-3.yml
+    ```
+
+
+### 如何解除 bot 註冊碼的主機綁定？
+
+程式關閉時，bot 註冊碼的主機綁定會自解除。但若不成功亦可透過一簡單的方法解除綁定，放執行檔後面加上 `--unbind` (e.g. `ipickup_pro-win-x64.exe --unbind`)
 
 
 ### Console 顯示的中文字為亂碼
