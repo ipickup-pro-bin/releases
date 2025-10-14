@@ -125,16 +125,17 @@ module.exports = {
 執行輸入 `pm2 start` 即可。
 
 
-### 監察器停止運作
+### 任務或監察器停止運作
 
-如果監察器內顯示的時間在檢測間距過後一直沒有跳動，便是監察器停止了運作。
+應用庫的bugs (暫無法修復) 會引致使用了proxy的任務或監察器會間中停止運作。
 
 -   **解決方法 1 - 手動**
-    
-    打開 **Dashboard** > 按一下 **重啟監察器**
+    -   打開 **Dashboard**
+        -   如 **監察器** 停止運作，按一下 **重啟監察器**
+        -   如 **任務** 停止運作，使用快捷鍵選取全部無反應的任務，之後再按 **停止** > **開始**
 
 -   **解決方法 2 - 自動 (感謝 tg@singdad 提供)**
-    -   使用 Tampermonkey 瀏覽器插件 (<https://www.tampermonkey.net/>)
+    -   <details> <summary>使用 Tampermonkey 瀏覽器插件 (www.tampermonkey.net)</summary>
         
         ```javascript
         // ==UserScript==
@@ -180,8 +181,9 @@ module.exports = {
          setTimeout(checkElementAndClickButton, 1000);
         })();
         ```
-    
-    -   用以下 PowerShell script 代替 `run.bat` (Windows 適用)
+        
+        </details>
+    -   <details> <summary>用以下 PowerShell script 代替 run.bat (Windows 適用)</summary>
         
         ```shell
         # Define the path to the program and the log files
@@ -219,6 +221,8 @@ module.exports = {
         # Clean up
         $process.WaitForExit()
         ```
+        
+        </details>
 
 
 ### 常見的錯誤和處理方法
